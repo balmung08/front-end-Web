@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"><!--utf-8编码-->
+		<title>pixiv爬虫小程序</title><!--页面标题-->
+        		<link rel="stylesheet" href="1.css"/>   
+	</head>
+	<body bgcolor=#F3F3F3>
+        		<div class="header">
+		<img src="../resource/2.png"style="width: 120px; height: 75px;float:right; ">
+		<img src="../resource/3.png"style="width: 120px; height: 75px; float:left;">
+		<span class="head-center"> ————————————————个人资源存放站 —————————————————</span>
+		</div>
+    		<div class="centerl">
+		<div class="centerl-head">
+		<span style="font-size:16px; line-height:30px;">左边栏</span>
+		</div>
+		<div class="center">
+		<a href="1.html"style="font-size:12px;">pixiv爬虫小程序</a>
+		</div>
+		<div class="center">
+		<a href="2.html"style="font-size:12px;">机器学习分类算法</a>
+		</div>
+		<div class="center">
+		<a href="demo.html"style="font-size:12px;">存放档位3</a>
+		</div>
+		<div class="center">
+		<a href="demo.html"style="font-size:12px;">存放档位4</a>
+		</div>
+		<div class="center">
+		<a href="demo.html"style="font-size:12px;">存放档位5</a>
+		</div>
+		<div class="center">
+		<a href="demo.html"style="font-size:12px;">存放档位5</a>
+		</div>
+		<div class="center">
+		<a href="demo.html"style="font-size:12px;">存放档位6</a>
+		</div>
+		<div class="center">
+		<a href="demo.html"style="font-size:12px;">存放档位7</a>
+		</div>
+		<div class="center">
+		<a href="demo.html"style="font-size:12px;">存放档位8</a>
+		</div>
+		<div class="center">
+		<a href="demo.html"style="font-size:12px;">存放档位9</a>
+		</div>
+		<div class="center">
+		<a href="demo.html"style="font-size:12px;">存放档位10</a>
+		</div>
+		<div class="center">
+		<a href="demo.html"style="font-size:12px;">存放档位11</a>
+		</div>
+		<div class="center">
+		<a href="main.html"style="font-size:12px;">返回主页</a>		
+		</div>
+		<div class="music">
+                    	<audio id="main-music" src="../resource/main.mp3" controls="controls" ></audio>
+
+		<script language="javascript">
+                                 function getVideo(){
+    		document.getElementById("main-music").volume =0.2;
+		}
+		</script>
+		<script language="javascript">
+		getVideo()
+		</script>
+		</div>
+		</div>
+        		<div class="centerr">
+		<!-- 网页注释，等于// -->
+		<span style="font-size:2px;">
+# -*- coding:utf-8 -*-             #使得代码可包含中文<br><br>import re  # 正则表达式，用于匹配文字<br>import urllib  # 指定url获取网页<br>import urllib.request<br>import requests<br>import json<br>import cv2<br>import tkinter<br>import tkinter.messagebox<br>import time<br>import datetime<br>x = 1<br>num = 0<br>zs = 10<br>z = 10<br><br>#获取验证码<br>picurl  = "https://pix.ipv4.host/verificationCode"<br>request1 = urllib.request.Request(url=picurl, headers=headers)<br>response1 = urllib.request.urlopen(request1)<br>htmls = response1.read().decode('utf-8')<br>html = json.loads(htmls)<br>vid = html["data"]["vid"]<br>piurl = "data:image/bmp;base64," + html["data"]["imageBase64"]<br><br>#输出验证码<br>img = urllib.request.Request(url=piurl, headers=headers)<br>response1 = urllib.request.urlopen(img)<br>htmls = response1.read()<br>path = "1.jpg"<br>with open(path, 'wb') as f:<br>    f.write(htmls)<br><br>#识别验证码<br><br><br><br>#输入验证码(暂时)<br>img0 = cv2.imread("1.jpg")<br><br>#cv2.imshow("img0",img0)<br>#cv2.waitKey(0)<br>#value = input("验证码为：")<br><br><br>#交互界面设计<br><br>interaction = tkinter.Tk()<br>interaction.title("pixiv镜像爬图")<br>interaction.geometry("450x200")<br><br>'''<br>img_gif =tkinter.PhotoImage(file='./动作/问号.gif')  # 设置图片<br>label_img = tkinter.Label(interaction, image=img_gif)  # 设置预显示图片<br>label_img.place(x=30, y=120)<br>def change_img():   # 设置按钮事件<br>    img_gif0 = tkinter.PhotoImage(file='./动作/走.gif')<br>    label_img.configure(image=img_gif0)<br>    label_img.place(x=30, y=120)<br>'''<br>back=tkinter.PhotoImage(file="resource\\background.png")<br>tkinter.Label(image=back,anchor = 'nw').place(x=0,y=0)<br>text1 = tkinter.Label(interaction, text="    图片来源为pixiv镜像站pixic",font=20).place(x=10,y=0)<br>photo = tkinter.PhotoImage(file="1.jpg")<br>tkinter.Label(image=photo).place(x=70, y=35)<br>tkinter.Label(interaction,text="输入爬取tag：",font=20).place(x=10,y=105)<br>tag = tkinter.StringVar()<br>text2 = tkinter.Entry(interaction,textvariable=tag).place(x=150,y=105)<br>code = tkinter.StringVar()<br>tkinter.Label(interaction,text="验证码：",font=20).place(x=10,y=135)<br>yzm =tkinter.Entry(interaction,textvariable=code).place(x=150,y=135)<br><br><br>def fuzhi(zhi):<br>    zhi = int(zhi)<br>    global z<br>    z = zhi / 30<br>    tkinter.messagebox.showinfo('tip', '已选择张数：%d'%zhi)<br>def crawler():<br>    value = code.get()<br>    name = tag.get()<br>    urlname = urllib.parse.quote(name)<br>    #读取登录信息<br>    header = { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36 Edg/92.0.902.73",<br>               "Referer": "https://pixivic.com/",<br>               "Path":"/users/token?vid="+vid+"&value="+value,<br>               "Content-Type": "application/json"<br>    }<br>    url = "https://pix.ipv4.host" + header["Path"]<br>    data = {'username': "", 'password': ""}<br>    req = requests.post(url=url, headers=header, json=data)<br>    authorization = req.headers["authorization"]<br>    print("loginover")<br><br>    def askurl(baseurl):<br>        head = { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36 Edg/92.0.902.73",<br>             "Referer": "https://pixivic.com/",<br>             "Authorization":authorization}<br>        rem = urllib.request.Request(url=baseurl, headers=head)<br>        response1 = urllib.request.urlopen(rem)<br>        htm = response1.read().decode('utf-8')<br>        js = json.loads(htm)<br>        return js<br><br>    def getData(baseurl):<br>        html = askurl(baseurl)  # 保存获取到的网页源码<br>        tkinter.messagebox.showinfo('login', '登录成功，关闭此窗口后开始')<br>        num = 0<br>        l = 0<br>        li = html["data"][l]<br>        for i in html["data"]:<br>            li = html["data"][l]<br>            for n in li['imageUrls']:<br>                lj = n['original']<br>                findlink = re.compile(r'img-original/img/(.*)')<br>                link = re.findall(findlink, lj)<br>                urll = "https://o.acgpic.net/img-original/img/"+ "%s"%link[num]<br>                img = requests.get(urll, headers=headers,timeout=200000).content<br>                print(urll)<br>                global x<br>                find = re.compile("\\d{8}")<br>                id = re.findall(find, urll)<br>                find2 = re.compile("\\d{8}(.*)")<br>                p = re.findall(find2, urll)<br>                print(id,p)<br>                if len(id) == 0:<br>                    find3 = re.compile("\\d{7}")<br>                    id = re.findall(find3, urll)<br>                    find4 = re.compile("\\d{7}(.*)")<br>                    p = re.findall(find4, urll)<br>                path = "pic\\" + str(id[0]) + str(p[0])<br>                print(path)<br>                # 将图片写入指定的目录 写入文件用"wb"<br>                with open(path, 'wb') as f:<br>                    f.write(img)<br>                    print("正在下载第{}张图片".format(x))<br>                x += 1<br>            l += 1<br><br>    global z<br>    z = int(z)<br>    for i in range(1,z):<br>        i = str(i)<br>        url = "https://pix.ipv4.host/illustrations?illustType=illust&searchType=original&maxSanityLevel=3&page="+i+"&keyword=%s&pageSize=30"%urlname<br>        print(url)<br>        getData(url)<br><br>    tkinter.messagebox.showinfo('已完成爬取', '已完成爬取，十秒后退出')<br>    time.sleep(10)<br>    interaction.destroy()<br>def ar():<br>    tkinter.messagebox.showinfo('关于作者', '本程序来自balmung\n登录pixic所用账号为自建，所获取的数据不可用于盈利')<br>def he():<br>    tkinter.messagebox.showinfo('帮助', '验证码输错或看不清请关闭重开\ntag找不到也需关闭重开\ntag开始爬取会有提示')<br>def daily_he():<br>    tkinter.messagebox.showinfo('说明',"爬取p站前一日日榜前30")<br><br>    # 获取信息<br>def dc():<br>    def askurl(url):<br>        headers = {<br>            "User-Agent": 'Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36x-requested-with: XMLHttpRequest',<br>            "Referer": 'https://pixivic.com/'<br>        }<br>        num = 0<br>        # 用户代理伪装成浏览器<br>        request = urllib.request.Request(url=url, headers=headers)<br>        html = ""<br>        try:<br>            response = urllib.request.urlopen(request)<br>            html = response.read().decode('utf-8')<br>            js = json.loads(html)<br><br><br>        except urllib.error.URLError as e:<br>            if hasattr(e, "code"):<br>                print(e.code)<br>            if hasattr(e, "reason"):<br>                print(e.reason)<br>        return js<br><br>    # 处理并存储信息<br>    def getData(baseurl):<br>        html = askurl(baseurl)  # 保存获取到的网页源码<br>        num = 0<br>        l = 0<br>        li = html["data"][l]<br>        for i in html["data"]:<br>            li = html["data"][l]<br>            for n in li['imageUrls']:<br>                lj = n['original']<br>                findlink = re.compile(r'img-original/img/(.*)')<br>                link = re.findall(findlink, lj)<br>                urll = "https://o.acgpic.net/img-original/img/" + "%s" % link[num]<br>                img = requests.get(urll, headers=headers).content<br>                global x<br>                find = re.compile("\\d{8}")<br>                id = re.findall(find, urll)<br>                find2 = re.compile("\\d{8}(.*)")<br>                p = re.findall(find2, urll)<br>                path = "daily\\" + str(id[0]) + str(p[0])<br>                # 将图片写入指定的目录 写入文件用"wb"<br>                with open(path, 'wb') as f:<br>                    f.write(img)<br>                    print("正在下载第{}张图片".format(x))<br>                x += 1<br>            l += 1<br>    i = datetime.datetime.now()<br>    y = i.year<br>    m = i.month<br>    d = i.day<br>    d -= 1<br>    url = "https://pix.ipv4.host/ranks?page=1&date="+"%02d-"%y+"%02d-"%m+"%02d"%d+"&mode=day&pageSize=30"<br>    try:<br>        getData(url)<br>    except Exception as e:<br>        y = i.year<br>        m = i.month<br>        d = i.day<br>        d -= 2<br>        url = "https://pix.ipv4.host/ranks?page=1&date="+"%02d-"%y+"%02d-"%m+"%02d"%d+"&mode=day&pageSize=30"<br>        getData(url)<br><br>menubar = tkinter.Menu(interaction)<br>filemenu = tkinter.Menu(menubar, tearoff=0)<br>menubar.add_cascade(label='爬取张数', menu=filemenu)<br>filemenu.add_command(label='30',command=lambda: fuzhi(30))<br>filemenu.add_command(label='60',command=lambda: fuzhi(60))<br>filemenu.add_command(label='90',command=lambda: fuzhi(90))<br>filemenu.add_command(label='120',command=lambda: fuzhi(120))<br>filemenu.add_command(label='150',command=lambda: fuzhi(150))<br>filemenu.add_command(label='180',command=lambda: fuzhi(180))<br>filemenu.add_command(label='210',command=lambda: fuzhi(210))<br>filemenu.add_command(label='240',command=lambda: fuzhi(240))<br>filemenu.add_command(label='270',command=lambda: fuzhi(270))<br>filemenu.add_command(label='300',command=lambda: fuzhi(300))<br>helpmenu = tkinter.Menu(menubar, tearoff=0)<br>menubar.add_cascade(label='帮助', menu=helpmenu)<br>helpmenu.add_command(label='关于',command=lambda: ar())<br>helpmenu.add_command(label='说明',command=lambda: he())<br>daily = tkinter.Menu(menubar, tearoff=0)<br>menubar.add_cascade(label='日榜', menu=daily)<br>daily.add_command(label='说明',command=lambda: daily_he())<br>daily.add_command(label='go',command=lambda: dc())<br>interaction.config(menu = menubar)<br>botton = tkinter.Button(interaction, text="开始爬取",command=crawler).place(x=110,y=160)<br>textF = tkinter.Label(interaction, text="PS:不选张数默认300").place(x=200,y=165)<br>interaction.mainloop()<br><br><br>#pyinstaller -F -p C:\Users\admin\PycharmProjects\pythonProject\venv\Lib\site-packages main.py<br>
+		</span>
+		</div>
+        		<div class="bottom">
+		<input type="button" value="查看提取码" onclick="MsgBox()" />
+		<script language="javascript">
+		function MsgBox() 
+		{
+		alert("提取码为bal0");
+		}
+		</script>
+		<a href="https://pan.baidu.com/s/18ib8hB1xEl2vHa24JaAAJw">爬虫小程序</a>
+		</div>
+	</body>
+</html>

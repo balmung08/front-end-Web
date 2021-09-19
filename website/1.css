@@ -1,0 +1,76 @@
+*{margin:0;padding:0}
+body{background=#EEEEEE}
+.header{
+    height:75px;
+    width:100%;
+    border: 1px solid grey;
+    text-align:center;
+    background:white;
+}
+.head-center{
+    height:75px;
+    line-height:75px;
+    font-family:"华文行楷";
+    font-size:30px;
+    width:100%;
+    text-align:center;
+}
+.backgroungpic{
+    height:75px;
+    width:100%;
+    border: 1px solid red;
+    background-image:url(../resource/2.png);
+    background-size:80px 50px;
+    background-repeat:no-repeat;
+}
+.center{
+    height:30px;
+    width:100%;
+    float:left;
+    text-align:center;
+    border: 1px solid #F0F1EC;
+    background-image:url(../resource/6.png);
+    background-size:cover;
+}
+.centerl-head{
+    height:30px;
+    width:100%;
+    float:left;
+    text-align:center;
+    border: 1px solid black;
+    background-image:url(../resource/5.png);
+    background-size:cover;
+}
+.centerl{
+    position:fixed;
+    width:14%;
+    float:left;
+}
+.centerr{
+    width:84.6%;
+    float:right;
+    background:url(../resource/4.png) #FFFFFF;
+    background-position: right center;
+    background-size:760px,cover;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    z-index:-1;
+}
+.bottom{
+    height:50px;
+    width:100%;
+    border: 1px solid grey;
+    clear:both;
+}
+.left-font{
+    color:black;
+    font-size:24px;
+    font-family:"黑体";
+}
+.music{
+    position:fixed;
+    width:14%;
+    right:100px;
+    bottom:0px;
+    z-index:1;
+}
